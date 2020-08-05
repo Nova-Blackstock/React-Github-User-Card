@@ -27,8 +27,9 @@ class App extends Component {
     console.log('yo')
   }
 
-  componentDidUpdate(){
-    axios.get(`https://api.github.com/users/${this.state.gitsearch}`)
+  componentDidUpdate(prevProps, prevState){
+    if (prevState.gitsearch !== this.state.gitsearch){
+      axios.get(`https://api.github.com/users/${this.state.gitsearch}`)
       .then(res =>{
         this.setState({
           gitbest: res.data
@@ -41,6 +42,7 @@ class App extends Component {
         gitbuds: res.data
       })
     })
+   }
   }
 
 
